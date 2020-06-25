@@ -1,17 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Phase 2: Feature Extarction. 
-In this script we detect faces using Dlib (hog) and extract the features using Face Recognition API on the 100 Celeb Dataset. 
-The embeddings and its corresponnding name are stored in a pickle file in a dictionary format.
-{
-     embedings:[emb0, emb1, emb2, emb3, .........],
-     names:[name0, name1, name2, name3, .........],
-     path: [img1_pth, img2_pth, ..........]   (This can be skipped)
-}
-The extracted features will then be used while classification.
-
-"""
-
 import cv2
 import dlib
 import face_recognition as freg
@@ -52,7 +38,7 @@ def main():
 
             if len(boxes)==1:
                 cnt += 1
-                encodings = freg.face_encodings(rgb, boxes,num_jitters=1)
+                encodings = freg.face_encodings(rgb, boxes,num_jitters=10,model='large')
 
                 knownEmbeddings.append(encodings[0])
                 knownNames.append(name)
